@@ -4,31 +4,25 @@
 
   https://shopify.dev/docs/storefronts/themes/architecture/templates/404
 {% endcomment %}
-{{ 'play.css' | asset_url | stylesheet_tag }}
 
 <div class="layout-wrapper">
 
   <div class="header-wrapper">
-    <h1>{{ '404.title' | t }}</h1>
-
-    <h4>
+    <h1 class="margin-none">{{ '404.title' | t }}</h1>
+    <h4 class="margin-none">
       {{ '404.not_found' | t }}
     </h4>
   </div>
 
   <div class="play">
     <h3>Numbers</h3>
-    <p>Let's play</p>
+    <p class="margin-none">Let's play</p>
     <div x-data="grow">
       <button @click="decrement">-</button>
-      <span x-text="count"></span>
+      <span x-text="count" :style="{ fontSize: 16 + count + 'px' }"></span>
       <button @click="increment">+</button>
     </div>
   </div>
-
-  <a href="{{ routes.all_products_collection_url }}">
-    {{ '404.back_to_shopping' | t }}
-  </a>
 
 </div>
 
