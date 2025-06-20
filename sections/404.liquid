@@ -4,16 +4,33 @@
 
   https://shopify.dev/docs/storefronts/themes/architecture/templates/404
 {% endcomment %}
+{{ 'play.css' | asset_url | stylesheet_tag }}
 
-<h1>{{ '404.title' | t }}</h1>
+<div class="layout-wrapper">
 
-<p>
-  {{ '404.not_found' | t }}
-</p>
+  <div class="header-wrapper">
+    <h1>{{ '404.title' | t }}</h1>
 
-<a href="{{ routes.all_products_collection_url }}">
-  {{ '404.back_to_shopping' | t }}
-</a>
+    <h4>
+      {{ '404.not_found' | t }}
+    </h4>
+  </div>
+
+  <div class="play">
+    <h3>Numbers</h3>
+    <p>Let's play</p>
+    <div x-data="{ count:0 }">
+      <button x-on:click="count++">-</button>
+      <span x-text="count"></span>
+      <button x-on:click="count--">+</button>
+    </div>
+  </div>
+
+  <a href="{{ routes.all_products_collection_url }}">
+    {{ '404.back_to_shopping' | t }}
+  </a>
+
+</div>
 
 {% schema %}
 {
