@@ -5,18 +5,53 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/404
 {% endcomment %}
 
+<style>
+.layout-wrapper > div {
+  margin-bottom: 50px;
+}
+.margin-top-none {
+  margin-top: 0;
+}
+.margin-bottom-none {
+  margin-bottom: 0;
+}
+.run {
+  bottom: 15%;
+  position: absolute;
+  animation: linear infinite;
+  animation-name: run;
+  animation-duration: 10s;
+}
+.human {
+  position: relative;
+  background: transparent;
+  border: 0;
+}
+.body {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: black;
+  border-radius: 100px;
+}
+@keyframes run {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 0;    
+  }
+}
+</style>
+
 <div class="layout-wrapper">
 
-  <div class="header-wrapper">
-    <h1 class="margin-none">{{ '404.title' | t }}</h1>
-    <h4 class="margin-none">
-      {{ '404.not_found' | t }}
-    </h4>
-  </div>
-
   <div class="play">
-    <h3>Numbers</h3>
-    <p class="margin-none">Let's play</p>
+    <h3 class="margin-bottom-none">Numbers</h3>
+    <p class="margin-top-none">Let's play</p>
     <div x-data="grow">
       <button @click="decrement">-</button>
       <span x-text="count" :style="{ fontSize: 16 + count + 'px' }"></span>
@@ -26,9 +61,14 @@
 
   <div class="toggle">
     <h3>Toggle</h3>
-    <div x-data="{ hide: true }">
-      <button x-on:click="hide = !hide">Hide & seek!</button>
-      <p x-show="!hide">Peekabooo</p>
+    <div x-data="run" style="position: relative;">
+      <button x-on:click="go">Hide & seek!</button>
+      <p :class="{ 'run' : running }" x-show="open">
+        <button @click="stop" x-show="running" class="human">
+          <span class="body"></span>
+        </button>
+      </p>
+      <p x-show="!running && open">You got me!</p>
   </div>
 
 </div>
@@ -43,6 +83,20 @@
         },
         increment() {
           this.count++
+        },
+      }
+    })
+
+    Alpine.data('run', () => {
+      return {
+        open: false,
+        running: false,
+        go() {
+          this.open = !this.open
+          this.running = !this.running
+        },
+        stop() {
+          this.running = false
         },
       }
     })
