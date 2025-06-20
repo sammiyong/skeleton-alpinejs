@@ -20,9 +20,9 @@
     <h3>Numbers</h3>
     <p>Let's play</p>
     <div x-data="{ count:0 }">
-      <button x-on:click="count++">-</button>
+      <button x-on:click="count !== 0 ? count-- : ''">-</button>
       <span x-text="count"></span>
-      <button x-on:click="count--">+</button>
+      <button x-on:click="count++">+</button>
     </div>
   </div>
 
