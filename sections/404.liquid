@@ -24,6 +24,13 @@
     </div>
   </div>
 
+  <div class="toggle">
+    <h3>Toggle</h3>
+    <div x-data="{ hide: true }">
+      <button x-on:click="hide = !hide">Hide & seek!</button>
+      <p x-show="!hide">Peekabooo</p>
+  </div>
+
 </div>
 
 <script>
